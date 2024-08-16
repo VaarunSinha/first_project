@@ -129,3 +129,4 @@ MEDIA_URL = "/media/"
 MEDIA_ROOT = os.path.join(BASE_DIR, "uploads")
 AUTH_USER_MODEL = "authentication.Author"
 LOGIN_REDIRECT_URL = "/news/"
+EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"

@@ -8,9 +8,10 @@
   <body>
     {% if request.user.is_authenticated %}
     <h1>Hi {{request.user.username}}, View {{len}} News:</h1>
-
-    {% endif %}
+    {% else %}
     <h1>View {{len}} News:</h1>
+    {% endif %}
+
     <form method="POST" action={% url "logout" %}>
       {% csrf_token %}
       <button type="submit">Logout</button>
