@@ -11,5 +11,15 @@
     <p>Created time: {{news.created_time}}</p>
     <p>Updated time: {{news.updated_time}}</p>
     <p>{{news.content}}</p>
+
+    {% if news.author %}
+    <h3>About the author</h3>
+    {% if news.author.image %}
+    <img src="{{news.author.image.url}}" alt="{{news.author.name}}" />
+    {% endif %}
+    <p>Name: {{news.author.username}}</p>
+    <p>Subtitle: {{news.author.subtitle |default_if_none:"No subtitle" }}</p>
+    <p>Bio: {{news.author.bio|default_if_none:"No Bio" }}</p>
+    {% endif %}
   </body>
 </html>
