@@ -11,3 +11,11 @@ class News(models.Model):
 
     def __str__(self):
         return self.title
+
+
+class Page(models.Model):
+    url = models.CharField(max_length=2000)
+    views = models.IntegerField(default=0)
+
+    def __str__(self):
+        return self.url
