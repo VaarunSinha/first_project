@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from .forms import NewsForm
+from news.models import News
 
 # Create your views here.
 
@@ -18,5 +19,36 @@ def news_create(request):
         else:
             form = NewsForm()
             return render(request, "news_form.html", {"form": form})
+    else:
+        return redirect("login")
+
+
+def delete_news(request, pk):
+    if request.user.is_authenticated:
+        news = News.objects.get(id=pk)
+        if news.author == request.user:
+            news.delete()
+            return redirect("home")
+
+        else:
+            return redirect("login")
+    else:
+        return redirect("login")
+
+
+def news_update(request, pk):
+    if request.user.is_authenticated:
+        news = News.objects.get(id=pk)
+        if news.author == request.user:
+            if request.POST:
+                form = NewsForm(request.POST, request.FILES, instance=news)
+                if form.is_valid():
+                    form.save()
+                    return redirect("detail_news", pk=news.id)
+            else:
+                form = NewsForm(instance=news)
+                return render(request, "news_form.html", {"form": form})
+        else:
+            return redirect("login")
     else:
         return redirect("login")
