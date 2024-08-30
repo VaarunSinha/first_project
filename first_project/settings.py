@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     "authentication",
     "author",
     "tasks",
+    "rest_framework",
 ]
 
 MIDDLEWARE = [
