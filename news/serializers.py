@@ -23,3 +23,10 @@ class NewsSerializer(ModelSerializer):
             "updated_time",
             "author",
         ]
+
+
+class NewsCreateSerializer(ModelSerializer):
+
+    class Meta:
+        model = News
+        fields = "__all__"
