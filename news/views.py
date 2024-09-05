@@ -5,6 +5,11 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
 from .serializers import NewsSerializer, NewsCreateSerializer
+from rest_framework.generics import (
+    RetrieveUpdateDestroyAPIView,
+    ListCreateAPIView,
+)
+from rest_framework.viewsets import ModelViewSet
 
 
 # Create your views here.
@@ -78,3 +83,24 @@ def news_detail(request, pk):
             return Response(serializer.data, status=status.HTTP_202_ACCEPTED)
         else:
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+# Class Based Views Django Rest Framework
+
+
+class NewsRetrieveUpdateDestroyView(RetrieveUpdateDestroyAPIView):
+    queryset = News.objects.all()
+    serializer_class = NewsSerializer
+
+
+class NewsListCreateAPIView(ListCreateAPIView):
+    queryset = News.objects.all()
+    serializer_class = NewsSerializer
+
+
+# Viewset Django Rest Framework
+
+
+class NewsViewSet(ModelViewSet):
+    queryset = News.objects.all()
+    serializer_class = NewsSerializer

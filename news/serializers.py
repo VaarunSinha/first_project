@@ -10,7 +10,7 @@ class AuthorNewsSerializer(ModelSerializer):
 
 
 class NewsSerializer(ModelSerializer):
-    author = AuthorNewsSerializer(read_only=True)
+    author_detail = AuthorNewsSerializer(source="author", read_only=True)
 
     class Meta:
         model = News
@@ -22,6 +22,7 @@ class NewsSerializer(ModelSerializer):
             "created_time",
             "updated_time",
             "author",
+            "author_detail",
         ]
 
 
