@@ -1,8 +1,16 @@
 from django.shortcuts import render, redirect
 from .forms import NewsForm
 from news.models import News
+from authentication.models import Author
+from .serializers import AuthorSerializer
+from rest_framework.generics import RetrieveAPIView
 
 # Create your views here.
+
+
+class AuthorRetrieve(RetrieveAPIView):
+    queryset = Author.objects.all()
+    serializer_class = AuthorSerializer
 
 
 def news_create(request):
