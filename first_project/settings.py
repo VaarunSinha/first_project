@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     "author",
     "tasks",
     "rest_framework",
+    "video_conversion",
 ]
 CORS_ALLOWED_ORIGINS = ["http://localhost:3000"]
 
