@@ -4,6 +4,9 @@ from news.models import News
 from authentication.models import Author
 from .serializers import AuthorSerializer
 from rest_framework.generics import RetrieveAPIView
+from django.conf import settings
+from django.utils.decorators import method_decorator
+from django.views.decorators.cache import cache_page
 
 # Create your views here.
 
@@ -11,6 +14,10 @@ from rest_framework.generics import RetrieveAPIView
 class AuthorRetrieve(RetrieveAPIView):
     queryset = Author.objects.all()
     serializer_class = AuthorSerializer
+
+    # @method_decorator(cache_page(settings.CACHE_TTL))
+    def get(self, request, *args, **kwargs):
+        return super().get(request, *args, **kwargs)
 
 
 def news_create(request):

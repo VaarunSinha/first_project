@@ -23,14 +23,19 @@ from rest_framework_simplejwt.views import (
     TokenObtainPairView,
     TokenRefreshView,
 )
+from debug_toolbar.toolbar import debug_toolbar_urls
 
-urlpatterns = [
-    path("admin/", admin.site.urls),
-    path("", include("news.urls")),
-    path("auth/", include("django.contrib.auth.urls")),
-    path("accounts/", include("authentication.urls")),
-    path("author/", include("author.urls")),
-    path("tasks/", include("tasks.urls")),
-    path("api/token/", TokenObtainPairView.as_view(), name="token_obtain_pair"),
-    path("api/token/refresh/", TokenRefreshView.as_view(), name="token_refresh"),
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+urlpatterns = (
+    [
+        path("admin/", admin.site.urls),
+        path("", include("news.urls")),
+        path("auth/", include("django.contrib.auth.urls")),
+        path("accounts/", include("authentication.urls")),
+        path("author/", include("author.urls")),
+        path("tasks/", include("tasks.urls")),
+        path("api/token/", TokenObtainPairView.as_view(), name="token_obtain_pair"),
+        path("api/token/refresh/", TokenRefreshView.as_view(), name="token_refresh"),
+    ]
+    + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    + debug_toolbar_urls()
+)
